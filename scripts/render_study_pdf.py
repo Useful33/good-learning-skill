@@ -254,7 +254,7 @@ def map_knowledge(info: dict) -> list[str]:
     nodes = info["nodes"]
     out = [r"\path[use as bounding box] (-8.1,-18.7) rectangle (8.1,.4);",
            r"\node[font=\sffamily\Large\bfseries] at (0,-.65) {" + escape_tex(info.get("headline", info["title"])) + "};",
-           r"\node[font=\sffamily\small,text=black!55] at (0,-1.35) {" + escape_tex(info.get("tagline", "按模块学习并检验掌握")) + "};",
+           r"\node[font=\sffamily\small,text=white!55] at (0,-1.35) {" + escape_tex(info.get("tagline", "按模块学习并检验掌握")) + "};",
            r"\draw[line width=.85pt] (0,-1.9) -- (0,-2.45);",
            r"\draw[line width=.85pt] (-4,-2.45) -- (4,-2.45);",
            r"\draw[line width=.85pt] (-4,-2.45) -- (-4,-2.8);",
@@ -267,13 +267,13 @@ def map_knowledge(info: dict) -> list[str]:
         row = i if col == 0 else i - 3
         y = -4.3 - 4.1 * row
         out.extend([
-            rf"\node[anchor=north west,font=\sffamily\fontsize{{22}}{{24}}\selectfont\bfseries,text=black!50] at ({x},{y}) {{{i+1:02d}}};",
+            rf"\node[anchor=north west,font=\sffamily\fontsize{{22}}{{24}}\selectfont\bfseries,text=white!50] at ({x},{y}) {{{i+1:02d}}};",
             rf"\node[anchor=north west,text width=5.9cm,align=left,font=\sffamily\large\bfseries] at ({x+1.15},{y+.02}) " + "{" + escape_tex(node["title"]) + "};",
             rf"\node[anchor=north west,text width=5.9cm,align=left,font=\sffamily\small] at ({x+1.15},{y-.75}) " + "{" + r"\\[.25em]".join(escape_tex(t) for t in node["lines"][:2]) + "};",
-            rf"\node[anchor=west,font=\sffamily\footnotesize,text=black!60] at ({x+1.15},{y-2.05}) " + "{" + escape_tex(node["lines"][-1]) + "};",
-            rf"\draw[black!35,line width=.4pt] ({x},{y-2.35}) -- ({x+7.15},{y-2.35});",
+            rf"\node[anchor=west,font=\sffamily\footnotesize,text=white!60] at ({x+1.15},{y-2.05}) " + "{" + escape_tex(node["lines"][-1]) + "};",
+            rf"\draw[white!35,line width=.4pt] ({x},{y-2.35}) -- ({x+7.15},{y-2.35});",
         ])
-    out.append(r"\node[font=\sffamily\small,text=black!55] at (0,-17.95) {" + escape_tex(info.get("footnote", "按编号复习 · 用能力验证检验掌握")) + "};")
+    out.append(r"\node[font=\sffamily\small,text=white!55] at (0,-17.95) {" + escape_tex(info.get("footnote", "按编号复习 · 用能力验证检验掌握")) + "};")
     return out
 
 
@@ -281,22 +281,22 @@ def map_plan(info: dict) -> list[str]:
     nodes = info["nodes"]
     out = [r"\path[use as bounding box] (-8.1,-19.3) rectangle (8.1,.4);",
            r"\node[anchor=west,font=\sffamily\Large\bfseries] at (-7.5,-.55) {" + escape_tex(info.get("headline", info["title"])) + "};",
-           r"\node[anchor=east,font=\sffamily\small,text=black!55] at (7.5,-.55) {" + escape_tex(info.get("date_range", "")) + "};",
-           r"\draw[black!45,line width=.7pt] (-6.65,-1.75) -- (-6.65,-16.65);"]
+           r"\node[anchor=east,font=\sffamily\small,text=white!55] at (7.5,-.55) {" + escape_tex(info.get("date_range", "")) + "};",
+           r"\draw[white!45,line width=.7pt] (-6.65,-1.75) -- (-6.65,-16.65);"]
     for i, node in enumerate(nodes[:5]):
         y = -2.25 - 3.35 * i
         date = node["lines"][0]
         details = node["lines"][1:]
         out.extend([
-            rf"\node[circle,draw=black,line width=.7pt,minimum size=9mm,fill=white,font=\sffamily\small\bfseries] at (-6.65,{y}) {{{i+1:02d}}};",
+            rf"\node[circle,draw=white,line width=.7pt,minimum size=9mm,fill=black,font=\sffamily\small\bfseries] at (-6.65,{y}) {{{i+1:02d}}};",
             rf"\node[anchor=west,font=\sffamily\large\bfseries] at (-5.75,{y+.45}) " + "{" + escape_tex(node["title"]) + "};",
-            rf"\node[anchor=east,font=\sffamily\small,text=black!55] at (7.45,{y+.45}) " + "{" + escape_tex(date) + "};",
+            rf"\node[anchor=east,font=\sffamily\small,text=white!55] at (7.45,{y+.45}) " + "{" + escape_tex(date) + "};",
             rf"\node[anchor=north west,text width=12.8cm,align=left,font=\sffamily\small] at (-5.75,{y-.15}) " + "{" + r"\quad{}·\quad{}".join(escape_tex(t) for t in details) + "};",
-            rf"\draw[black!25,line width=.4pt] (-5.75,{y-1.35}) -- (7.45,{y-1.35});",
+            rf"\draw[white!25,line width=.4pt] (-5.75,{y-1.35}) -- (7.45,{y-1.35});",
         ])
     feedback = nodes[5]
     out.extend([
-        r"\draw[black!45,line width=.7pt] (-7.5,-18.35) -- (7.5,-18.35);",
+        r"\draw[white!45,line width=.7pt] (-7.5,-18.35) -- (7.5,-18.35);",
         r"\node[anchor=west,font=\sffamily\bfseries] at (-7.4,-18.8) {" + escape_tex(feedback["title"]) + "};",
         r"\node[anchor=east,font=\sffamily\small] at (7.4,-18.8) {" + "  →  ".join(escape_tex(t) for t in feedback["lines"]) + "};",
     ])
@@ -307,23 +307,23 @@ def map_day(info: dict) -> list[str]:
     nodes = info["nodes"]
     out = [r"\path[use as bounding box] (-8.1,-18.7) rectangle (8.1,.4);",
            r"\node[font=\sffamily\Large\bfseries] at (0,-.6) {" + escape_tex(info.get("headline", info["title"])) + "};",
-           r"\node[font=\sffamily\small,text=black!55] at (0,-1.25) {" + escape_tex(info.get("tagline", "从概念走向独立练习")) + "};"]
+           r"\node[font=\sffamily\small,text=white!55] at (0,-1.25) {" + escape_tex(info.get("tagline", "从概念走向独立练习")) + "};"]
     positions = [(-7.35,-2.35), (.85,-2.35), (.85,-7.7), (-7.35,-7.7), (-7.35,-13.05), (.85,-13.05)]
     for i, (x, y) in enumerate(positions):
         node = nodes[i]
         out.extend([
-            rf"\node[anchor=north west,font=\sffamily\fontsize{{22}}{{24}}\selectfont\bfseries,text=black!50] at ({x},{y}) {{{i+1:02d}}};",
+            rf"\node[anchor=north west,font=\sffamily\fontsize{{22}}{{24}}\selectfont\bfseries,text=white!50] at ({x},{y}) {{{i+1:02d}}};",
             rf"\node[anchor=north west,text width=5.8cm,align=left,font=\sffamily\large\bfseries] at ({x+1.15},{y+.03}) " + "{" + escape_tex(node["title"]) + "};",
             rf"\node[anchor=north west,text width=5.9cm,align=left,font=\sffamily\small] at ({x+1.15},{y-.72}) " + "{" + r"\\[.25em]".join(escape_tex(t) for t in node["lines"]) + "};",
-            rf"\draw[black!35,line width=.4pt] ({x},{y-2.7}) -- ({x+7.05},{y-2.7});",
+            rf"\draw[white!35,line width=.4pt] ({x},{y-2.7}) -- ({x+7.05},{y-2.7});",
         ])
     out.extend([
-        r"\draw[->,black!55,line width=.8pt] (-.12,-3.7) -- (.55,-3.7);",
-        r"\draw[->,black!55,line width=.8pt] (7.85,-5.45) -- (7.85,-7.2);",
-        r"\draw[->,black!55,line width=.8pt] (.52,-9.05) -- (-.15,-9.05);",
-        r"\draw[->,black!55,line width=.8pt] (-7.85,-10.8) -- (-7.85,-12.55);",
-        r"\draw[->,black!55,line width=.8pt] (-.12,-14.4) -- (.55,-14.4);",
-        r"\node[font=\sffamily\small,text=black!55] at (0,-18.1) {" + escape_tex(info.get("footnote", "概念 → 例题 → 独立练习 → 核对答案")) + "};",
+        r"\draw[->,white!55,line width=.8pt] (-.12,-3.7) -- (.55,-3.7);",
+        r"\draw[->,white!55,line width=.8pt] (7.85,-5.45) -- (7.85,-7.2);",
+        r"\draw[->,white!55,line width=.8pt] (.52,-9.05) -- (-.15,-9.05);",
+        r"\draw[->,white!55,line width=.8pt] (-7.85,-10.8) -- (-7.85,-12.55);",
+        r"\draw[->,white!55,line width=.8pt] (-.12,-14.4) -- (.55,-14.4);",
+        r"\node[font=\sffamily\small,text=white!55] at (0,-18.1) {" + escape_tex(info.get("footnote", "概念 → 例题 → 独立练习 → 核对答案")) + "};",
     ])
     return out
 
@@ -339,7 +339,7 @@ def map_tex(info: dict, kind: str) -> str:
 
 PREAMBLE = r"""\documentclass[UTF8,a4paper,11pt]{ctexart}
 \usepackage[margin=22mm,headheight=14pt,footskip=12mm]{geometry}
-\usepackage{amsmath,amssymb,array,longtable,booktabs,tikz,needspace,enumitem,fancyhdr,hyperref}
+\usepackage{amsmath,amssymb,array,longtable,booktabs,tikz,needspace,enumitem,fancyhdr,hyperref,xcolor}
 \usepackage{microtype}
 \hypersetup{colorlinks=false,pdfborder={0 0 0},pdfauthor={Good Learning},bookmarks=false}
 \newfontfamily\circledfont{Segoe UI Symbol}
@@ -358,8 +358,44 @@ subsection={format=\large\bfseries\sffamily,beforeskip=1em,afterskip=.45em}}
 \newcommand{\CompactQuestionColon}[2]{\par\noindent\textbf{#1：}\ #2\par\vspace{.8em}}
 \newcommand{\PracticeQuestionColon}[3]{\par\Needspace{4\baselineskip}\noindent\begin{minipage}{\linewidth}\textbf{#1：}\ #2\par\noindent\rule{0pt}{#3mm}\par\end{minipage}\par}
 \pagestyle{fancy}\fancyhf{}\fancyfoot[C]{\thepage}\renewcommand{\headrulewidth}{0pt}
+% Page colours are substituted by preamble() below (skill rule).
+\pagecolor{__PAGECOLOR__}
+\color{__TEXTCOLOR__}
 \begin{document}
 """
+
+# Colour themes (skill rule): every generated PDF is black with white text, except
+# the two documents that exist to be printed and written on by hand -- the loose
+# lesson layout and the error book -- which stay white with black text.
+THEMES = {
+    "dark": ("black", "white"),
+    "light": ("white", "black"),
+}
+
+
+def theme_for(kind: str, layout: str) -> str:
+    """Loose lessons and error books print on paper, so they use the light theme."""
+    if kind == "errors":
+        return "light"
+    if kind == "day" and layout == "loose":
+        return "light"
+    return "dark"
+
+
+def preamble(theme: str) -> str:
+    page, text = THEMES[theme]
+    return PREAMBLE.replace("__PAGECOLOR__", page).replace("__TEXTCOLOR__", text)
+
+
+def theme_map_tex(tex: str, theme: str) -> str:
+    """Flip the mindmap's white-on-black colours when the light theme is used."""
+    if theme == "dark":
+        return tex
+    return (
+        tex.replace("white!", "black!")
+        .replace("draw=white", "draw=black")
+        .replace("fill=black", "fill=white")
+    )
 
 
 def render(source: Path, output: Path, kind: str, layout: str, map_info: dict) -> None:
@@ -368,8 +404,16 @@ def render(source: Path, output: Path, kind: str, layout: str, map_info: dict) -
     if kind == "day":
         cover["title"] += "（宽松排版型）" if layout == "loose" else "（紧凑排版型）"
     list_style = r"\setlist[enumerate]{label=\arabic*）}" if kind == "errors" else ""
-    cover_tex = "" if kind == "errors" else map_tex(cover, kind) + "\n"
-    tex = PREAMBLE + cover_tex + list_style + "\n" + body_tex(markdown, kind, layout) + "\n\\end{document}\n"
+    theme = theme_for(kind, layout)
+    cover_tex = "" if kind == "errors" else theme_map_tex(map_tex(cover, kind) + "\n", theme)
+    tex = (
+        preamble(theme)
+        + cover_tex
+        + list_style
+        + "\n"
+        + body_tex(markdown, kind, layout)
+        + "\n\\end{document}\n"
+    )
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(tex, encoding="utf-8")
 
